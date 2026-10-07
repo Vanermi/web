@@ -18,8 +18,8 @@ from urllib.parse import urlsplit
 SITE = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else
                     pathlib.Path(__file__).resolve().parent.parent / "docs").resolve()
 
-CSP = ("default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; "
-       "form-action 'none'; upgrade-insecure-requests")
+CSP = ("default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; "
+       "base-uri 'none'; form-action 'none'; upgrade-insecure-requests")
 REFERRER = "no-referrer"
 
 # Elements that would run code, embed third parties, collect data or need a looser CSP.
@@ -29,7 +29,9 @@ FORBIDDEN_TAGS = {"script", "noscript", "iframe", "frame", "frameset", "object",
 # Attributes whose value the browser fetches.
 RESOURCE_ATTRS = {"src", "srcset", "poster", "data", "background", "action", "formaction",
                   "manifest", "ping"}
-ALLOWED_FILES = {".html", ".css", ".webp", ".png", ".jpg", ".jpeg", ".svg", ".ico", ".txt", ""}
+ALLOWED_FILES = {".html", ".css", ".webp", ".png", ".jpg", ".jpeg", ".svg", ".ico", ".txt",
+                 ".woff2", ""}
+LANGS = {"en", "es"}
 
 
 class Page(HTMLParser):
@@ -94,8 +96,8 @@ def main():
         tags = [t for t, _, _ in p.tags]
 
         html = next((a for t, a, _ in p.tags if t == "html"), {})
-        if html.get("lang") != "es":
-            err(name, '<html> must have lang="es"')
+        if html.get("lang") not in LANGS:
+            err(name, f"<html> must have lang set to one of {sorted(LANGS)}")
 
         metas = [a for t, a, _ in p.tags if t == "meta"]
         if not metas or metas[0].get("charset", "").lower() != "utf-8":
@@ -128,6 +130,10 @@ def main():
                         err(where, f"{k}={url!r} loads something from another origin")
                     elif url and not target_file(f, url).is_file():
                         err(where, f"{k}={url!r} does not exist")
+            if t not in ("a", "link"):
+                for k in ("href", "xlink:href"):
+                    if is_offsite(a.get(k, "")):
+                        err(where, f"<{t} {k}={a[k]!r}> loads something from another origin")
             if t == "link":
                 url = a.get("href", "")
                 if is_offsite(url):
@@ -174,10 +180,11 @@ def main():
             if is_offsite(url):
                 err(f.relative_to(SITE), f"url({url}) loads something from another origin")
 
-    # Belt and braces: every absolute URL anywhere in the text files.
+    # Belt and braces: every absolute URL anywhere in the pages and stylesheets.
+    # (Plain-text files such as licences are served as text and load nothing.)
     found = []
     for f in sorted(SITE.rglob("*")):
-        if f.is_file() and f.suffix in (".html", ".css", ".txt"):
+        if f.is_file() and f.suffix in (".html", ".css"):
             for m in re.finditer(r"(?:https?:)?//[^\s\"'<>)]+", f.read_text(encoding="utf-8")):
                 found.append((str(f.relative_to(SITE)), m.group(0)))
     nav = set(outbound)
