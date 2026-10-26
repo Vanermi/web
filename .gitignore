@@ -23,3 +23,6 @@ www.vanermi.com/
 *.sql.gz
 wordpress*.xml
 *-wordpress-*.xml
+*[Ww]ord[Pp]ress*.xml
+backup_*.zip
+*uploads*.zip
