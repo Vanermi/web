@@ -1,0 +1,423 @@
+/*
+ * Vanermi: a copy of the current landing's look (Elementor kit 181, page 294,
+ * header 195, footer 192), rewritten as plain CSS. Breakpoints as in Elementor:
+ * tablet up to 1024px, mobile up to 767px.
+ */
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/montserrat-latin.woff2") format("woff2");
+}
+
+:root {
+  --turquoise: #6cdae7;  /* Elementor global "primary" and "accent" */
+  --ink: #2b2b2b;        /* Elementor global "secondary" and "text" */
+  --white: #ffffff;
+  --container: 1140px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--turquoise);
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Header: the logo, centred. */
+.site-header {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.site-header img {
+  width: 250px;
+}
+
+/* Landing */
+.landing {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 125px 0 75px;
+  display: flex;
+  flex-direction: column;
+}
+
+.landing h1 {
+  align-self: flex-end;
+  width: 69%;
+  margin: 0;
+  text-align: end;
+  font-size: 121px;
+  font-weight: 600;
+  line-height: 1em;
+  color: var(--ink);
+}
+
+.landing .tagline {
+  align-self: flex-end;
+  width: 55%;
+  margin: 0;
+  text-align: end;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.2em;
+  color: var(--turquoise);
+}
+
+/* Elementor stacks the two lines as widgets 20px apart; each <p> keeps a 0.9rem bottom margin. */
+.landing .soon {
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.landing .soon p {
+  margin: 0 0 0.9rem;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 0.7em;
+}
+
+.landing .soon .hashtag {
+  margin: -7px -7px calc(0.9rem - 7px);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 0.1em;
+  color: var(--turquoise);
+}
+
+/* Footer: logo, "Follow" and "Get in Touch" in three columns. */
+.site-footer {
+  padding: 100px 100px 100px;
+}
+
+.footer-groups {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 220px;
+  padding-bottom: 20px;
+}
+
+.footer-logo {
+  margin-bottom: 22px;
+}
+
+.footer-logo img {
+  width: 100px;
+}
+
+.site-footer h2 {
+  margin: 0 0 22px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.1em;
+  text-transform: capitalize;
+  color: var(--ink);
+}
+
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.site-footer li {
+  display: flex;
+  align-items: center;
+}
+
+.site-footer ul.social {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.site-footer ul a {
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5em;
+  color: var(--turquoise);
+  transition: color 0.3s;
+}
+
+.site-footer .social svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--turquoise);
+}
+
+.copyright {
+  border-top: 1px solid var(--ink);
+  padding-top: 20px;
+  text-align: end;
+}
+
+.copyright p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1em;
+  color: var(--ink);
+}
+
+/* The only addition to the landing: links to the legal pages. */
+.copyright .legal {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.copyright .legal a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Legal pages (new, in Spanish), in the same type and colours. */
+.legal-page {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 60px 16px 40px;
+  line-height: 1.6;
+}
+
+.legal-page h1 {
+  margin: 0 0 24px;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.1em;
+}
+
+.legal-page h2 {
+  margin: 36px 0 12px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2em;
+}
+
+.legal-page p,
+.legal-page ul {
+  margin: 0 0 16px;
+}
+
+.legal-page a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--turquoise);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.legal-page dl {
+  display: grid;
+  grid-template-columns: minmax(9rem, max-content) 1fr;
+  gap: 8px 24px;
+  margin: 0 0 16px;
+}
+
+.legal-page dt {
+  font-weight: 600;
+}
+
+.legal-page dd {
+  margin: 0;
+}
+
+.updated {
+  margin-top: 32px;
+  font-size: 14px;
+}
+
+/* Data still missing: deliberately visible until it is filled in. */
+.todo {
+  background: #fff4ce;
+  color: #3d2e00;
+  border-left: 4px solid #a86f00;
+  padding: 0.1em 0.4em;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .site-header img {
+    width: 150px;
+  }
+
+  .landing {
+    max-width: 1024px;
+  }
+
+  .landing h1 {
+    font-size: 68px;
+  }
+
+  .landing .tagline {
+    width: 360px;
+    max-width: 100%;
+    font-size: 22px;
+  }
+
+  .landing .soon p {
+    font-size: 20px;
+  }
+
+  .landing .soon .hashtag {
+    font-size: 18px;
+  }
+
+  .site-footer {
+    padding: 60px;
+  }
+
+  .footer-groups {
+    gap: 40px;
+  }
+
+  .footer-logo img {
+    width: 68px;
+  }
+
+  .site-footer h2 {
+    font-size: 16px;
+    line-height: 1em;
+  }
+
+  .site-footer ul a {
+    font-size: 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .site-header img {
+    width: 100px;
+  }
+
+  .landing {
+    max-width: 767px;
+    padding: 75px 0 75px;
+  }
+
+  .landing h1 {
+    width: 353px;
+    max-width: 100%;
+    padding: 10px;
+    font-size: 48px;
+    line-height: 1.1em;
+    letter-spacing: 1px;
+  }
+
+  .landing .tagline {
+    width: 274px;
+    padding: 7px;
+    font-size: 16px;
+    line-height: 1.1em;
+  }
+
+  .landing .soon {
+    margin-top: 75px;
+  }
+
+  .landing .soon p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1em;
+  }
+
+  .landing .soon .hashtag {
+    margin: -7px;
+    font-size: 14px;
+    line-height: 0.4em;
+  }
+
+  .site-footer {
+    padding: 32px;
+    text-align: center;
+  }
+
+  .footer-groups {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .footer-logo a,
+  .site-footer ul {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer-logo a {
+    display: flex;
+  }
+
+  .footer-logo img {
+    width: 80px;
+  }
+
+  .footer-logo,
+  .site-footer h2 {
+    margin-bottom: 15px;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+
+  .copyright p {
+    font-size: 9px;
+  }
+
+  .copyright .legal {
+    font-size: 12px;
+  }
+
+  .legal-page h1 {
+    font-size: 28px;
+  }
+
+  .legal-page dl {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .legal-page dd {
+    margin-bottom: 12px;
+  }
+}

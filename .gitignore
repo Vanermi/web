@@ -1,0 +1,28 @@
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+
+# Never commit: secrets, copies of the old site, WordPress exports and database dumps
+.env
+.env.*
+*.pem
+*.key
+vanermi-web-copia/
+www.vanermi.com/
+*.wpress
+*.sql
+*.sql.gz
+wordpress*.xml
+*-wordpress-*.xml
+*[Ww]ord[Pp]ress*.xml
+backup_*.zip
+*uploads*.zip
